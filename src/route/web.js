@@ -9,6 +9,9 @@ let initWebRoutes = (app) => {
     });
 
     router.post("/api/insert-user", userController.handleInsertUser);
+    router.get("/api/get-user", userController.handleGetUser);
+    router.delete("/api/delete-user/:userId", userController.handleDeleteUser);
+    router.put("/api/update-user/:userId", userController.handleUpdateUser);
 
     return app.use("/", router);
 }
