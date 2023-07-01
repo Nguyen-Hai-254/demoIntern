@@ -18,7 +18,8 @@ const handleInsertUser = async (req, res) => {
 
     try {
         const newUser = await userServices.insertUser(userData);
-        return res.status(201).json(newUser);
+        const { password: omit, ...userWithoutPassword } = newUser;
+        return res.status(201).json(userWithoutPassword);
     } catch (error) {
         return res.status(500).json({ error});
     }
