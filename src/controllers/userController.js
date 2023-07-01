@@ -1,11 +1,14 @@
 import userServices from "../services/userServices"
+import bcrypt from "bcrypt";
 
 const handleInsertUser = async (req, res) => {
     const { email, password, firstName, lastName, address, phoneNumber, gender } = req.body;
 
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const userData = {
         email,
-        password,
+        password: hashedPassword,
         firstName,
         lastName,
         address,
@@ -17,7 +20,7 @@ const handleInsertUser = async (req, res) => {
         const newUser = await userServices.insertUser(userData);
         return res.status(201).json(newUser);
     } catch (error) {
-        return res.status(500).json({ error: "Failed to insert user" });
+        return res.status(500).json({ error});
     }
 };
 

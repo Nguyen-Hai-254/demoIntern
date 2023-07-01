@@ -3,10 +3,17 @@ import db from "../models";
 const insertUser = (userData) => {
     return new Promise(async (resolve, reject) => {
         try {
+            const existingUser = await db.User.findOne({
+                where: { email: userData.email },
+              });
+              
+              if (existingUser) {
+                throw new Error("User with the same email already exists");
+              }
             const newUser = await db.User.create(userData);
             resolve(newUser);
         } catch (e) {
-            reject(e);
+            reject(e.message);
         }
     })
 
