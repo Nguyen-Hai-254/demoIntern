@@ -1,8 +1,8 @@
 import express from "express";
 import bodyParser from "body-parser";
-import initWebRoutes from "./route/web"
-import connectDB from "./config/connectDB"
-import cors from "cors"
+import initWebRoutes from "./route/web";
+import connectDB from "./config/connectDB";
+import cors from "cors";
 require('dotenv').config();
 
 
